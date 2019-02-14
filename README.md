@@ -1,2 +1,2 @@
-# charp-training
+# csharp-training
 part-2
