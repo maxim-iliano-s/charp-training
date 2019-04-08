@@ -86,19 +86,28 @@ namespace addressbook_web_tests
             driver.FindElement(By.Name("email")).SendKeys(contact.Email);
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
-            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
+
+            // --> Day of the Birth
+            driver.FindElement(By.Name("bmonth")).Click();
             driver.FindElement(By.Name("bmonth")).Click();
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
-            //driver.FindElement(By.CssSelector("option[value=\\" + contact.Bmonth + "\\]")).Click();
+            driver.FindElement(By.CssSelector("option[value=\"" + contact.Bmonth + "\"]")).Click();
+            driver.FindElement(By.Name("bday")).Click();
+            driver.FindElement(By.Name("bday")).Click();
+            //new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("1");
+            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
+            driver.FindElement(By.CssSelector("option[value=\"" + contact.Bday + "\"]")).Click();
             driver.FindElement(By.Name("byear")).Click();
-            //driver.FindElement(By.Name("byear")).Clear();
+            driver.FindElement(By.Name("byear")).Clear();
             driver.FindElement(By.Name("byear")).SendKeys(contact.Byear);
+            // <-- Day of the Birth
             driver.FindElement(By.Name("address2")).Click();
-            //driver.FindElement(By.Name("address2")).Clear();
+            driver.FindElement(By.Name("address2")).Clear();
             driver.FindElement(By.Name("address2")).SendKeys(contact.Address2);
             driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
+            
         }
 
         private void InitContactCreation()

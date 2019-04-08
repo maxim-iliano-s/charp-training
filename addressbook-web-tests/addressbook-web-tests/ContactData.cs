@@ -19,8 +19,8 @@ namespace addressbook_web_tests
         private string mobile = "";
         private string email = "";
         private string homepage = "";
-        private string bday = "4";
-        private string bmonth = "February";
+        private string bday = "12";
+        private string bmonth = "May";
         private string byear = "1880";
         private string address2 = "";
         private string notes = "";
