@@ -73,14 +73,17 @@
     <Compile Include="AccountData.cs" />
     <Compile Include="ContactCreationTests.cs" />
     <Compile Include="ContactData.cs" />
+    <Compile Include="GroupRemovalTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroupCreationTests.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>i:\GIT_repos\source\repos\csharp-training.v.2.0\addressbook-web-tests\addressbook-web-tests\bin\Debug\</Generator>
     </Compile>
+    <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GroupData.cs" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
