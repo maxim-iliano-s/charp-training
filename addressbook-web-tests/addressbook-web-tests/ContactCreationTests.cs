@@ -13,15 +13,15 @@ namespace addressbook_web_tests
         [Test]
         public void ContactCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitContactCreation();
+            navigationHelper.GoToHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
+            contactHelper.InitContactCreation();
             ContactData contact = new ContactData("nnnn", "xxxx");
             contact.Address = "Aweert, Assd st., 2/3";
             contact.Email = "asdf@sdfg.org";
             contact.Home = "+79095556633";
-            FillContactForm(contact);
-            SubmitContactCreation();
+            contactHelper.FillContactForm(contact);
+            contactHelper.SubmitContactCreation();
         }
     }
 }
