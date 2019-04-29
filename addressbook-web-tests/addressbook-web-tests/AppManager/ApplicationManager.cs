@@ -24,16 +24,16 @@ namespace addressbook_web_tests
         public ApplicationManager()
         {
 
-            FirefoxOptions options = new FirefoxOptions();
-            options.UseLegacyImplementation = true;
-            options.BrowserExecutableLocation = @"I:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-            driver = new FirefoxDriver(options);
+            driver = new FirefoxDriver();
+            //FirefoxOptions options = new FirefoxOptions();
             baseURL = "http://localhost/";
-            
-            loginHelper = new LoginHelper(driver);
-            navigationHelper = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            //options.UseLegacyImplementation = true;
+            //options.BrowserExecutableLocation = @"I:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+
+            loginHelper = new LoginHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
         }
 
         public void Stop()
@@ -52,5 +52,6 @@ namespace addressbook_web_tests
         public NavigationHelper Navigator { get => navigationHelper; set => navigationHelper = value; }
         public GroupHelper Groups { get => groupHelper; set => groupHelper = value; }
         public ContactHelper Contacts { get => contactHelper; set => contactHelper = value; }
+        public IWebDriver Driver { get => driver; }
     }
 }
