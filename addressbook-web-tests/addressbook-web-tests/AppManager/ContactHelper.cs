@@ -109,7 +109,7 @@ namespace addressbook_web_tests
             // --> Day of the Birth
             driver.FindElement(By.Name("bmonth")).Click();
             driver.FindElement(By.Name("bmonth")).Click();
-            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
+           // new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
             driver.FindElement(By.CssSelector("option[value=\"" + contact.Bmonth + "\"]")).Click();
             driver.FindElement(By.Name("bday")).Click();
             driver.FindElement(By.Name("bday")).Click();

@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\AuthTestBase.cs" />
     <Compile Include="Tests\ContactModificationTests.cs" />
     <Compile Include="Tests\ContactRemovalTests.cs" />
     <Compile Include="Model\AccountData.cs">
@@ -90,6 +91,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator>i:\GIT_repos\source\repos\csharp-training.v.2.0\addressbook-web-tests\addressbook-web-tests\bin\Debug\</Generator>
     </Compile>
+    <None Include="Tests\Massage_cs" />
+    <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -19,9 +20,10 @@ namespace addressbook_web_tests
         protected NavigationHelper navigationHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-        
 
-        public ApplicationManager()
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager()
         {
 
             driver = new FirefoxDriver();
@@ -36,7 +38,19 @@ namespace addressbook_web_tests
             contactHelper = new ContactHelper(this);
         }
 
-        public void Stop()
+        public static ApplicationManager GetInstance()
+        {
+            if (! app.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.navigationHelper.GoToHomePage();
+                app.Value = newInstance;
+            }
+            return app.Value;
+        }
+
+
+        ~ApplicationManager()
         {
             try
             {
@@ -48,6 +62,7 @@ namespace addressbook_web_tests
             }
         }
 
+        
         public LoginHelper Auth { get => loginHelper; set => loginHelper = value; }
         public NavigationHelper Navigator { get => navigationHelper; set => navigationHelper = value; }
         public GroupHelper Groups { get => groupHelper; set => groupHelper = value; }
