@@ -13,7 +13,7 @@ namespace addressbook_web_tests
         [Test]
         public void LoginWithValidCredantionals()
         {
-            app.Auth.Logout();
+            //app.Auth.Logout();
 
             AccountData account = new AccountData("admin", "secret");
             app.Auth.Login(account);
@@ -25,12 +25,13 @@ namespace addressbook_web_tests
         [Test]
         public void LoginWithInalidCredantionals()
         {
-            app.Auth.Logout();
+            //app.Auth.Logout();
 
             AccountData account = new AccountData("admin", "111");
             app.Auth.Login(account);
 
             Assert.IsFalse(app.Auth.IsLoggedIn(account));
+            //Assert.IsTrue(app.Auth.IsLoggedIn(account));
         }
     }
 }

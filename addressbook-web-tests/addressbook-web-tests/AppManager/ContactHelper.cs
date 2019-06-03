@@ -26,12 +26,38 @@ namespace addressbook_web_tests
 
         internal ContactHelper ContactModification(int v, ContactData contact)
         {
+
+            /*if (!IsContactPresent())
+                {
+                ContactData cont = new ContactData() { };
+                Create();
+                v = 1;
+                }*/
+
+            IsContactPresent_2();
+            
             SelectContact(v);
             EditContactForm(contact);
             SubmitContactModification();
             return this;
         }
 
+        public ContactHelper IsContactPresent_2()
+        {
+            if(!IsElementPresent(By.Name("selected[]")))
+            {
+                ContactData cont = new ContactData() { };
+                Create();
+                return this;
+            }
+
+            return this;
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
 
         public ContactHelper EditContactForm(ContactData contact)
         {
@@ -133,12 +159,16 @@ namespace addressbook_web_tests
 
         public ContactHelper Remove(int index)
         {
+            //manager.Navigator.GoToHomePage();
             //index = +1;
             ++index;
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
+            //driver.FindElement(By.CssSelector("a:value='home'")).Click();
+            IsContactPresent_2();
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
-            acceptNextAlert = true;
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+acceptNextAlert = true;
+            //driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
 
             return this;

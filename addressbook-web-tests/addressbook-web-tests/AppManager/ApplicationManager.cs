@@ -28,7 +28,7 @@ namespace addressbook_web_tests
 
             driver = new FirefoxDriver();
             //FirefoxOptions options = new FirefoxOptions();
-            baseURL = "http://localhost/";
+            baseURL = "http://localhost";
             //options.UseLegacyImplementation = true;
             //options.BrowserExecutableLocation = @"I:\Program Files (x86)\Mozilla Firefox\firefox.exe";
 
