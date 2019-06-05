@@ -161,6 +161,7 @@ namespace addressbook_web_tests
         {
             //manager.Navigator.GoToHomePage();
             //index = +1;
+            //sdf
             ++index;
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
             //driver.FindElement(By.CssSelector("a:value='home'")).Click();
