@@ -48,15 +48,9 @@ namespace addressbook_web_tests
             {
                 ContactData cont = new ContactData() { };
                 Create();
-                return this;
+                //return this;
             }
-
-            return this;
-        }
-
-        public bool IsContactPresent()
-        {
-            return IsElementPresent(By.Name("selected[]"));
+        return this;
         }
 
         public ContactHelper EditContactForm(ContactData contact)
@@ -157,21 +151,37 @@ namespace addressbook_web_tests
 
         private bool acceptNextAlert = true;
 
-        public ContactHelper Remove(int index)
+        //public ContactHelper Remove(int index)
+        public void Remove(int index)
         {
             //manager.Navigator.GoToHomePage();
-            //index = +1;
-            //sdf
             ++index;
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
             //driver.FindElement(By.CssSelector("a:value='home'")).Click();
-            IsContactPresent_2();
+            //IsContactPresent_2();
+            CountPresentContact(index);
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
 acceptNextAlert = true;
             //driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
 
+            //return this;
+        }
+
+        public ContactHelper CountPresentContact(int v)
+        {
+            int contactCount = driver.FindElements(By.Name("selected[]")).Count();
+            if (v > contactCount)
+            {
+                for (int i = 1; i <= v; i++)
+                {
+                    ContactData cont = new ContactData() { };
+                    Create();
+                    //return this;
+                }
+                manager.Navigator.GoToHomePage();
+            }
             return this;
         }
 

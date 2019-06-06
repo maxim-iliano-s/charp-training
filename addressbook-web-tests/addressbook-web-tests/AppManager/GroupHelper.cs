@@ -28,6 +28,7 @@ namespace addressbook_web_tests
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
+            IsGroupPresent_1(v);
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -35,6 +36,27 @@ namespace addressbook_web_tests
             ReturnToGroupPage();
             return this;
         }
+
+        public GroupHelper IsGroupPresent_1(int v)
+        {
+            int groupCount = driver.FindElements(By.Name("selected[]")).Count();
+            if (v > groupCount)
+            {
+                for (int i = 1; i <= v; i++)
+                {
+                    GroupData group = new GroupData("")
+                    {
+                        Header = "",
+                        Footer = ""
+                    };
+                    Create(group);
+                }
+                manager.Navigator.GoToGroupsPage();
+            }
+            return this;
+        }
+        
+        
 
         public GroupHelper Remove(int index)
         {
@@ -44,6 +66,22 @@ namespace addressbook_web_tests
             ReturnToGroupPage();
             return this;
         }
+
+        /*public ContactHelper CountPresentContact(int v)
+        {
+            int contactCount = driver.FindElements(By.Name("selected[]")).Count();
+            if (v > contactCount)
+            {
+                for (int i = 1; i <= v; i++)
+                {
+                    ContactData cont = new ContactData() { };
+                    Create();
+                    //return this;
+                }
+                manager.Navigator.GoToHomePage();
+            }
+            return this;
+        }*/
 
         public GroupHelper FillGroupForm(GroupData group)
         {
