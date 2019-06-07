@@ -30,6 +30,17 @@ namespace addressbook_web_tests
             return this;
         }
 
+        
+        public GroupHelper Remove(int index)
+        {
+            manager.Navigator.GoToGroupsPage();
+            IsGroupPresent_1(index);
+            SelectGroup(index);
+            RemoveGroup();
+            ReturnToGroupPage();
+            return this;
+        }
+
         public GroupHelper IsGroupPresent_1(int v)
         {
             int groupCount = driver.FindElements(By.Name("selected[]")).Count();
@@ -48,18 +59,6 @@ namespace addressbook_web_tests
             }
             return this;
         }
-        
-        
-
-        public GroupHelper Remove(int index)
-        {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(index);
-            RemoveGroup();
-            ReturnToGroupPage();
-            return this;
-        }
-
         /*public ContactHelper CountPresentContact(int v)
         {
             int contactCount = driver.FindElements(By.Name("selected[]")).Count();
