@@ -16,7 +16,7 @@ namespace addressbook_web_tests
             ContactData contact = new ContactData()
             {
                 Firstname = "Aaaaa",
-                Lastname = "Sssss",
+                Lastname = null,
                 Address = "Aweert, Assd st., 2/3"
             };
             

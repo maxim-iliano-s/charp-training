@@ -33,17 +33,7 @@ namespace addressbook_web_tests
             driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
         }
 
-        private void Type(By by, string text)
-        {
-            if(text != null)
-            {
-                driver.FindElement(by).Click();
-                driver.FindElement(by).Clear();
-                driver.FindElement(by).SendKeys(text);
-            }
-        }
-
-        public bool IsLoggedIn()
+                public bool IsLoggedIn()
         {
             return IsElementPresent(By.Name("logout"));
         }

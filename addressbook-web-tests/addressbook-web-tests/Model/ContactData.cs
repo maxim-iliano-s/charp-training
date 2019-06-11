@@ -30,8 +30,8 @@ namespace addressbook_web_tests
 
         public ContactData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            this.firstname = null;
+            this.lastname = null;
         }
 
         public ContactData(string firstname, string lastname, string adress, string email, string mobile)
