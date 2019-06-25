@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -41,11 +41,12 @@ namespace addressbook_web_tests
             return groups;
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(int index, GroupData newData)
         {
+            index++;
             manager.Navigator.GoToGroupsPage();
-            IsGroupPresent_1(v);
-            SelectGroup(v);
+            IsGroupPresent_1(index);
+            SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -56,6 +57,7 @@ namespace addressbook_web_tests
         
         public GroupHelper Remove(int index)
         {
+            index++;
             manager.Navigator.GoToGroupsPage();
             IsGroupPresent_1(index);
             SelectGroup(index);
@@ -64,12 +66,12 @@ namespace addressbook_web_tests
             return this;
         }
 
-        public GroupHelper IsGroupPresent_1(int v)
+        public GroupHelper IsGroupPresent_1(int index)
         {
             int groupCount = driver.FindElements(By.Name("selected[]")).Count();
-            if (v > groupCount)
+            if (index > groupCount)
             {
-                for (int i = 1; i <= v; i++)
+                for (int i = 1; i <= index; i++)
                 {
                     GroupData group = new GroupData("")
                     {
