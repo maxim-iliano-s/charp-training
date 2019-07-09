@@ -45,10 +45,10 @@ namespace addressbook_web_tests
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData() {};
+            ContactData contact = new ContactData("") {};
 
             List<ContactData> oldContact = app.Contacts.GetContactsList();
-            app.Contacts.Create();
+            app.Contacts.Create(contact);
 
             List<ContactData> newContact = app.Contacts.GetContactsList();
             oldContact.Add(contact);

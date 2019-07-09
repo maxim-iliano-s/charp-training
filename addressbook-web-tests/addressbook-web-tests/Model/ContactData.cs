@@ -62,9 +62,9 @@ namespace addressbook_web_tests
             if (Firstname == other.Firstname)
                 if (Lastname != other.Lastname)
                 {
-                    return false;
+                    return Firstname == other.Firstname;
                 }
-            return false;
+            return Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
@@ -74,7 +74,8 @@ namespace addressbook_web_tests
 
         public override string ToString()
         {
-            return "Firstname: " + Firstname + " ; Lastname: " + Lastname;
+            //return "Firstname: " + Firstname + " ; Lastname: " + Lastname;
+            return Firstname +  Lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -85,9 +86,13 @@ namespace addressbook_web_tests
             }
 
             if (Firstname.CompareTo(other.Firstname) == 0)
+            {
+                Console.WriteLine("Firstname.CompareTo(other.Firstname) == 0");
                 return Lastname.CompareTo(other.Lastname);
+            }
             else
-                return Firstname.CompareTo(other.Firstname);
+                //  return Firstname.CompareTo(other.Firstname);
+                return Lastname.CompareTo(other.Lastname);
         }
 
         public string Firstname { get => firstname; set => firstname = value; }

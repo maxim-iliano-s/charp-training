@@ -50,7 +50,7 @@ namespace addressbook_web_tests
             ICollection<IWebElement> lName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)"));
             ICollection<IWebElement> fName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(3)"));
             //lName.ElementAt(1);
-            int index = 0;
+            //int index = 0;
 
             for (int i=0; i<lName.Count();i++)
             {
