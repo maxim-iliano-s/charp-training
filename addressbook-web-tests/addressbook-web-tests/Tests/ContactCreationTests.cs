@@ -45,13 +45,15 @@ namespace addressbook_web_tests
         [Test]
         public void EmptyContactCreationTest()
         {
-            ContactData contact = new ContactData("") {};
+            ContactData contact = new ContactData("");
+
+            ContactData contact_2 = new ContactData("","gg");
 
             List<ContactData> oldContact = app.Contacts.GetContactsList();
             app.Contacts.Create(contact);
 
             List<ContactData> newContact = app.Contacts.GetContactsList();
-            oldContact.Add(contact);
+            oldContact.Add(contact_2);
             oldContact.Sort();
             newContact.Sort();
 

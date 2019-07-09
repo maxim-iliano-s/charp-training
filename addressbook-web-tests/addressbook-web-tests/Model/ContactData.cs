@@ -8,7 +8,7 @@ namespace addressbook_web_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
+        private string firstname = null;
         private string middlename = "";
         private string lastname = "";
         private string nickname = "";
@@ -30,7 +30,7 @@ namespace addressbook_web_tests
 
         public ContactData(string firstname)
         {
-            this.firstname = null;
+            this.firstname = firstname;
         }
 
         public ContactData(string firstname, string lastname)
@@ -87,12 +87,13 @@ namespace addressbook_web_tests
 
             if (Firstname.CompareTo(other.Firstname) == 0)
             {
-                Console.WriteLine("Firstname.CompareTo(other.Firstname) == 0");
+                Console.WriteLine(" NOW in ---> Firstname.CompareTo(other.Firstname) == 0");
                 return Lastname.CompareTo(other.Lastname);
             }
             else
                 //  return Firstname.CompareTo(other.Firstname);
-                return Lastname.CompareTo(other.Lastname);
+            Console.WriteLine(" NOW in  only ---> Lastname.CompareTo(other.Lastname)");
+            return Lastname.CompareTo(other.Lastname);
         }
 
         public string Firstname { get => firstname; set => firstname = value; }
