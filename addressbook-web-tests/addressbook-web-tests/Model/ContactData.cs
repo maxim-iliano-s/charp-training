@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstname;
         private string middlename = "";
@@ -28,10 +28,15 @@ namespace addressbook_web_tests
 
         public ContactData() {}
 
-        public ContactData(string firstname, string lastname)
+        public ContactData(string firstname)
         {
             this.firstname = null;
-            this.lastname = null;
+        }
+
+        public ContactData(string firstname, string lastname)
+        {
+            this.firstname = firstname;
+            this.lastname = lastname;
         }
 
         public ContactData(string firstname, string lastname, string adress, string email, string mobile)
@@ -41,6 +46,48 @@ namespace addressbook_web_tests
             this.address = adress;
             this.email = email;
             this.mobile = mobile;
+        }
+
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (Firstname == other.Firstname)
+                if (Lastname != other.Lastname)
+                {
+                    return false;
+                }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Firstname.GetHashCode() + Lastname.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "Firstname: " + Firstname + " ; Lastname: " + Lastname;
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+
+            if (Firstname.CompareTo(other.Firstname) == 0)
+                return Lastname.CompareTo(other.Lastname);
+            else
+                return Firstname.CompareTo(other.Firstname);
         }
 
         public string Firstname { get => firstname; set => firstname = value; }

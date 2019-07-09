@@ -27,6 +27,7 @@ namespace addressbook_web_tests
             oldGroup.Sort();
             newGroup.Sort();
             Assert.AreEqual(oldGroup, newGroup);
+            Console.WriteLine( "{0}", Object.ReferenceEquals(oldGroup, newGroup), "bla bla");
 
         }
     }

@@ -42,6 +42,39 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public List<ContactData> GetContactsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            
+            ICollection<IWebElement> lName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)"));
+            ICollection<IWebElement> fName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(3)"));
+            //lName.ElementAt(1);
+            int index = 0;
+
+            for (int i=0; i<lName.Count();i++)
+            {
+                contacts.Add(new ContactData(fName.ElementAt(i).Text, lName.ElementAt(i).Text));
+            }
+
+            /*foreach (IWebElement element in fName)
+            {
+                //++index;
+                contacts.Add(new ContactData(element.Text, lName.ElementAt(index++).Text));
+                //Console.WriteLine("contacts firstname Text: " + element.Text);
+            }*/
+
+            return contacts;
+
+        }
+
+        public void DisplayContact()
+        {
+            manager.Navigator.GoToHomePage();
+            Console.WriteLine("contacts td:nth-child(4) Text: " + driver.FindElement(By.CssSelector("tr[name='entry'] td:nth-child(4)")).Text);
+        }
+
+
         public ContactHelper IsContactPresent_2()
         {
             if(!IsElementPresent(By.Name("selected[]")))
