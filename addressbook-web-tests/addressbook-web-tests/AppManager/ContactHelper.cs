@@ -42,20 +42,34 @@ namespace addressbook_web_tests
             return this;
         }
 
+
+        internal int GetContactCount()
+        {
+            return driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)")).Count;
+        }
+
+
+        private List<ContactData> contactCahce = null;
+
         public List<ContactData> GetContactsList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();
-            
-            ICollection<IWebElement> lName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)"));
-            ICollection<IWebElement> fName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(3)"));
-            //lName.ElementAt(1);
-            //int index = 0;
-
-            for (int i=0; i<lName.Count();i++)
+            if (contactCahce == null)
             {
-                contacts.Add(new ContactData(fName.ElementAt(i).Text, lName.ElementAt(i).Text));
+                List<ContactData> contacts = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+
+                ICollection<IWebElement> lName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)"));
+                ICollection<IWebElement> fName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(3)"));
+                for (int i = 0; i < lName.Count(); i++)
+                {
+                    contactCahce.Add(new ContactData(fName.ElementAt(i).Text, lName.ElementAt(i).Text));
+                }
             }
+
+            //for (int i=0; i<lName.Count();i++)
+            //{
+            //   contacts.Add(new ContactData(fName.ElementAt(i).Text, lName.ElementAt(i).Text));
+            //}
 
             /*foreach (IWebElement element in fName)
             {
@@ -64,7 +78,7 @@ namespace addressbook_web_tests
                 //Console.WriteLine("contacts firstname Text: " + element.Text);
             }*/
 
-            return contacts;
+            return new List<ContactData>(contactCahce);
 
         }
 
@@ -127,6 +141,7 @@ namespace addressbook_web_tests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCahce = null;
             return this;
         }
 
@@ -134,6 +149,7 @@ namespace addressbook_web_tests
         {
             driver.FindElement(By.XPath("//input[@name='update']")).Click();
             //driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            contactCahce = null;
             return this;
         }
 
@@ -171,7 +187,7 @@ namespace addressbook_web_tests
         private bool acceptNextAlert = true;
 
         //public ContactHelper Remove(int index)
-        public void Remove(int index)
+        public ContactHelper Remove(int index)
         {
             //manager.Navigator.GoToHomePage();
             ++index;
@@ -184,8 +200,8 @@ acceptNextAlert = true;
             //driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
-
-            //return this;
+            contactCahce = null;
+            return this;
         }
 
         public ContactHelper CountPresentContact(int v)

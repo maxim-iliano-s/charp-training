@@ -8,25 +8,28 @@ namespace addressbook_web_tests
 {
     public class GroupData : IEquatable<GroupData> , IComparable<GroupData>
     {
-        private string name;
+        //private string name;
         private string header = "";
         private string footer = "";
 
 		public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
         }
 
         public GroupData(string name, string header, string footer)
         {
-            this.name = name;
+            Name = name;
             this.header = header;
             this.footer = footer;
         }
 
-        public string Name  {get => name; set => name = value;}
+        //public string Name  {get => name; set => name = value;}
+        public string Name { get; set; }
         public string Header { get => header; set => header = value; }
         public string Footer { get => footer; set => footer = value; }
+        public string Id{ get; set; }
+
 
         public bool Equals(GroupData other)
         {

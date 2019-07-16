@@ -19,15 +19,17 @@ namespace addressbook_web_tests
             newData.Header = null;
             newData.Footer = null;
 
-            List<GroupData> oldGroup = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Modify(0, newData);
 
-            List<GroupData> newGroup = app.Groups.GetGroupList();
-            oldGroup[0].Name = newData.Name;
-            oldGroup.Sort();
-            newGroup.Sort();
-            Assert.AreEqual(oldGroup, newGroup);
-            Console.WriteLine( "{0}", Object.ReferenceEquals(oldGroup, newGroup), "bla bla");
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            Console.WriteLine( "{0}", Object.ReferenceEquals(oldGroups, newGroups), "bla bla");
 
         }
     }

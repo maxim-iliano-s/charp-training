@@ -19,9 +19,19 @@ namespace addressbook_web_tests
                 Lastname = null,
                 Address = "Aweert, Assd st., 2/3"
             };
-            
+
+            List<ContactData> oldContact = app.Contacts.GetContactsList();
             app.Contacts.ContactModification(1, contact);
 
+            List<ContactData> newContact = app.Contacts.GetContactsList();
+            oldContact[1].Firstname = contact.Firstname;
+            oldContact[1].Lastname = contact.Lastname;
+            oldContact[1].Address = contact.Address;
+                        
+            oldContact.Sort();
+            newContact.Sort();
+
+            Assert.AreEqual(oldContact, newContact);
         }
     }
 }
