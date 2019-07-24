@@ -24,7 +24,7 @@ namespace addressbook_web_tests
             return this;
         }
 
-        internal ContactHelper ContactModification(int v, ContactData contact)
+        internal ContactHelper ContactModification(int contact_id, ContactData contact)
         {
 
             /*if (!IsContactPresent())
@@ -34,9 +34,11 @@ namespace addressbook_web_tests
                 v = 1;
                 }*/
 
-            IsContactPresent_2();
-            
-            SelectContact(v);
+            //IsContactPresent_2(contact_id);
+            CountPresentContact(contact_id);
+
+
+            SelectContact(contact_id);
             EditContactForm(contact);
             SubmitContactModification();
             return this;
@@ -55,7 +57,7 @@ namespace addressbook_web_tests
         {
             if (contactCahce == null)
             {
-                List<ContactData> contacts = new List<ContactData>();
+                contactCahce = new List<ContactData>();
                 manager.Navigator.GoToHomePage();
 
                 ICollection<IWebElement> lName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(2)"));
@@ -79,7 +81,6 @@ namespace addressbook_web_tests
             }*/
 
             return new List<ContactData>(contactCahce);
-
         }
 
         public void DisplayContact()
@@ -89,13 +90,14 @@ namespace addressbook_web_tests
         }
 
 
-        public ContactHelper IsContactPresent_2()
+        public ContactHelper IsContactPresent_2(int contact_id)
         {
             if(!IsElementPresent(By.Name("selected[]")))
             {
-                ContactData cont = new ContactData() { };
-                Create();
-                //return this;
+                //ContactData cont = new ContactData() { };
+                Create(new ContactData());
+                
+                return this;
             }
         return this;
         }
@@ -119,11 +121,11 @@ namespace addressbook_web_tests
             return this;
         }
 
-        public ContactHelper SelectContact(int index)
+        public ContactHelper SelectContact(int contact_id)
         {
-            ++index;
+            ++contact_id;
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]/td/input")).Click();
             acceptNextAlert = true;
             driver.FindElement(By.XPath("//img[@title='Edit']")).Click();
 
@@ -187,15 +189,16 @@ namespace addressbook_web_tests
         private bool acceptNextAlert = true;
 
         //public ContactHelper Remove(int index)
-        public ContactHelper Remove(int index)
+
+        public ContactHelper Remove(int contact_id)
         {
             //manager.Navigator.GoToHomePage();
-            ++index;
+            //++index;
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
             //driver.FindElement(By.CssSelector("a:value='home'")).Click();
             //IsContactPresent_2();
-            CountPresentContact(index);
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
+            CountPresentContact(contact_id);
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]/td/input")).Click();
 acceptNextAlert = true;
             //driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
@@ -204,12 +207,13 @@ acceptNextAlert = true;
             return this;
         }
 
-        public ContactHelper CountPresentContact(int v)
+        public ContactHelper CountPresentContact(int contact_id)
         {
+            manager.Navigator.GoToHomePage();
             int contactCount = driver.FindElements(By.Name("selected[]")).Count();
-            if (v > contactCount)
+            if (contact_id > contactCount)
             {
-                for (int i = 1; i <= v; i++)
+                for (int i = 1; i <= contact_id; i++)
                 {
                     ContactData cont = new ContactData() { };
                     Create();
