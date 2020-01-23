@@ -170,7 +170,6 @@ namespace addressbook_web_tests
             Type(By.Name("homepage"),contact.Homepage);
 
             // --> Day of the Birth
-            //driver.FindElement(By.Name("bmonth")).Click();
             driver.FindElement(By.Name("bmonth")).Click();
            // new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
             driver.FindElement(By.CssSelector("option[value=\"" + contact.Bmonth + "\"]")).Click();
@@ -180,6 +179,7 @@ namespace addressbook_web_tests
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
             driver.FindElement(By.CssSelector("option[value=\"" + contact.Bday + "\"]")).Click();
             Type(By.Name("byear"), contact.Byear);
+           
             // <-- Day of the Birth
             Type(By.Name("address2"), contact.Address2);
             Type(By.Name("notes"), contact.Notes);
@@ -188,18 +188,21 @@ namespace addressbook_web_tests
 
         private bool acceptNextAlert = true;
 
-        //public ContactHelper Remove(int index)
-
+        
         public ContactHelper Remove(int contact_id)
         {
-            //manager.Navigator.GoToHomePage();
             //++index;
+            contact_id = contact_id+2;
+            
+            manager.Navigator.GoToHomePage();
             driver.FindElement(By.XPath("//a[contains(text(),'home')]")).Click();
-            //driver.FindElement(By.CssSelector("a:value='home'")).Click();
-            //IsContactPresent_2();
-            CountPresentContact(contact_id);
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]/td/input")).Click();
-acceptNextAlert = true;
+            //IsContactPresent_2();            
+            //CountPresentContact(contact_id); временно отключаю функцию - не помню её суть 
+            //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]/td/input")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]//input")).Click();
+            // / html / body / div / div[4] / form[2] / table / tbody / tr[2] / td[1] / input
+
+            //acceptNextAlert = true;
             //driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.FindElement(By.CssSelector("input[value='Delete']")).Click();
             Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));

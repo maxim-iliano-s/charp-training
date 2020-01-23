@@ -12,9 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-
-
-
 namespace addressbook_web_tests
 {
     [TestFixture]

@@ -15,13 +15,12 @@ namespace addressbook_web_tests
         public void ContactRemovalTest()
         {
             List<ContactData> oldContact = app.Contacts.GetContactsList();
+            app.Contacts.Remove(0);
 
-            app.Contacts.Remove(1);
-
-           // Assert.AreEqual(oldContact.Count -1, app.Contacts.GetContactCount());
+            Assert.AreEqual(oldContact.Count-1, app.Contacts.GetContactCount());
 
             List<ContactData> newContact = app.Contacts.GetContactsList();
-            oldContact.RemoveAt(1);
+            oldContact.RemoveAt(0);
             oldContact.Sort();
             newContact.Sort();
 
