@@ -8,6 +8,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Windows.Forms;
 
 namespace addressbook_web_tests
 {
@@ -64,6 +65,7 @@ namespace addressbook_web_tests
                 ICollection<IWebElement> fName = driver.FindElements(By.CssSelector("tr[name='entry'] td:nth-child(3)"));
                 for (int i = 0; i < lName.Count(); i++)
                 {
+                    MessageBox.Show(fName.ElementAt(i).Text + " <-fName AND lName-> " +  lName.ElementAt(i).Text, "In GetContactsList");
                     contactCahce.Add(new ContactData(fName.ElementAt(i).Text, lName.ElementAt(i).Text));
                 }
             }
@@ -86,7 +88,8 @@ namespace addressbook_web_tests
         public void DisplayContact()
         {
             manager.Navigator.GoToHomePage();
-            Console.WriteLine("contacts td:nth-child(4) Text: " + driver.FindElement(By.CssSelector("tr[name='entry'] td:nth-child(4)")).Text);
+            MessageBox.Show(driver.FindElement(By.CssSelector("tr[name='entry'] td:nth-child(4)")).Text);
+            
         }
 
 
@@ -199,6 +202,7 @@ namespace addressbook_web_tests
             //IsContactPresent_2();            
             //CountPresentContact(contact_id); временно отключаю функцию - не помню её суть 
             //driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]/td/input")).Click();
+
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + contact_id + "]//input")).Click();
             // / html / body / div / div[4] / form[2] / table / tbody / tr[2] / td[1] / input
 

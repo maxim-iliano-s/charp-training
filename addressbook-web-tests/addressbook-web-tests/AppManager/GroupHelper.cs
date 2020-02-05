@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
-//using System.Collections.Generic;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -53,7 +52,7 @@ namespace addressbook_web_tests
 
         public GroupHelper Modify(int index, GroupData newData)
         {
-            index++;
+            ++index;
             manager.Navigator.GoToGroupsPage();
             IsGroupPresent_1(index);
             SelectGroup(index);
@@ -67,7 +66,7 @@ namespace addressbook_web_tests
         
         public GroupHelper Remove(int index)
         {
-            index++;
+            ++index;
             manager.Navigator.GoToGroupsPage();
             IsGroupPresent_1(index);
             SelectGroup(index);

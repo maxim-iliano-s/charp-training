@@ -2,8 +2,10 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System.Windows.Forms;
 
 namespace addressbook_web_tests
 {
@@ -17,6 +19,7 @@ namespace addressbook_web_tests
             List<ContactData> oldContact = app.Contacts.GetContactsList();
             app.Contacts.Remove(0);
 
+            MessageBox.Show("In ContactRemovalTest", "AreEqual");
             Assert.AreEqual(oldContact.Count-1, app.Contacts.GetContactCount());
 
             List<ContactData> newContact = app.Contacts.GetContactsList();
@@ -24,6 +27,7 @@ namespace addressbook_web_tests
             oldContact.Sort();
             newContact.Sort();
 
+            MessageBox.Show("In ContactRemovalTest", "AreEqual");
             Assert.AreEqual(oldContact, newContact);
         }
     }

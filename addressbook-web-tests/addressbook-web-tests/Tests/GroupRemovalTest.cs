@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System.Windows.Forms;
 
 namespace addressbook_web_tests
 {
@@ -24,6 +25,8 @@ namespace addressbook_web_tests
             oldGroups.RemoveAt(0);
             oldGroups.Sort();
             newGroups.Sort();
+            
+            MessageBox.Show("In AreEqual(oldGroups, newGroups) )", "GroupRemovalTest");
             Assert.AreEqual(oldGroups, newGroups);
         }
     }

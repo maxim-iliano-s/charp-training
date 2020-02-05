@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace addressbook_web_tests
 {
@@ -52,23 +53,29 @@ namespace addressbook_web_tests
         {
             if (Object.ReferenceEquals(other, null))
             {
+                MessageBox.Show("In 'Equals' if - other, null ", "ContactData");
                 return false;
             }
             if (Object.ReferenceEquals(this, other))
             {
+                MessageBox.Show("In 'Equals' if - this, other ", "ContactData");
                 return true;
             }
 
             if (Firstname == other.Firstname)
                 if (Lastname != other.Lastname)
                 {
+                    MessageBox.Show("In 'Equals' if Lastname != other.Lastname ", "ContactData");
                     return Firstname == other.Firstname;
                 }
+
+            MessageBox.Show("In 'Equals' if Firstname == other.Firstname AND Lastname == other.Lastname ", "ContactData");
             return Lastname == other.Lastname;
         }
 
         public override int GetHashCode()
         {
+            MessageBox.Show("In 'GetHashCode' ", "ContactData");
             return Firstname.GetHashCode() + Lastname.GetHashCode();
         }
 
@@ -87,12 +94,12 @@ namespace addressbook_web_tests
 
             if (Firstname.CompareTo(other.Firstname) == 0)
             {
-                Console.WriteLine(" NOW in ---> Firstname.CompareTo(other.Firstname) == 0");
+                MessageBox.Show("Compare Lastname for Contacts", "CompareTo");
                 return Lastname.CompareTo(other.Lastname);
             }
             else
                 //  return Firstname.CompareTo(other.Firstname);
-            Console.WriteLine(" NOW in  only ---> Lastname.CompareTo(other.Lastname)");
+                MessageBox.Show("Compare Lastname for Contacts", "CompareTo");
             return Lastname.CompareTo(other.Lastname);
         }
 
